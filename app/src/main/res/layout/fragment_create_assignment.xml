@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:text="Add a task"
+            android:text="Add a assignment"
             android:textColor="@android:color/black"
             android:textSize="22sp"
             tools:ignore="MissingPrefix" />
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Fill the details below to add a task into your TODO"
+            android:text="Fill the details below to add a assignment into your TODO"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:alpha="0.8"
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Task title"
+            android:text="Assignment title"
             tools:ignore="MissingPrefix" />
 
         <EditText
@@ -63,7 +63,7 @@
             android:singleLine="true"
             android:background="@drawable/btn_border"
             android:padding="10dp"
-            android:id="@+id/addTaskTitle"
+            android:id="@+id/addAssignmentTitle"
             tools:ignore="MissingPrefix" />
 
     <TextView
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Task description"
+        android:text="Assignment description"
         tools:ignore="MissingPrefix" />
 
     <EditText
@@ -84,7 +84,7 @@
         android:singleLine="true"
         android:background="@drawable/btn_border"
         android:padding="10dp"
-        android:id="@+id/addTaskDescription"
+        android:id="@+id/addAssignmentDescription"
         tools:ignore="MissingPrefix" />
 
     <TextView
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Task date"
+        android:text="Assignment date"
         tools:ignore="MissingPrefix" />
 
     <EditText
@@ -105,7 +105,7 @@
         android:singleLine="true"
         android:background="@drawable/btn_border"
         android:padding="10dp"
-        android:id="@+id/taskDate"
+        android:id="@+id/assignmentDate"
         tools:ignore="MissingPrefix" />
 
     <TextView
@@ -114,7 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Task time"
+        android:text="Assignment time"
         tools:ignore="MissingPrefix" />
 
     <EditText
@@ -126,7 +126,7 @@
         android:singleLine="true"
         android:background="@drawable/btn_border"
         android:padding="10dp"
-        android:id="@+id/taskTime"
+        android:id="@+id/assignmentTime"
         tools:ignore="MissingPrefix" />
 
     <TextView
@@ -147,14 +147,14 @@
         android:singleLine="true"
         android:background="@drawable/btn_border"
         android:padding="10dp"
-        android:id="@+id/taskEvent"
+        android:id="@+id/assignmentEvent"
         tools:ignore="MissingPrefix" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/addTask"
-        android:text="Add task"
+        android:id="@+id/addAssignment"
+        android:text="Add assignment"
         android:background="@drawable/btn_background"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="40dp" />

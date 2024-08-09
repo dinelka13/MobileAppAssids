@@ -1,4 +1,4 @@
-package com.codegama.todolistapplication.bottomSheetFragment;
+package com.codegama.assignmentassistant.bottomSheetFragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -12,17 +12,15 @@ import androidx.annotation.RequiresApi;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
-import com.codegama.todolistapplication.R;
-import com.codegama.todolistapplication.activity.MainActivity;
-import com.codegama.todolistapplication.database.DatabaseClient;
-import com.codegama.todolistapplication.model.Task;
+import com.codegama.assignmentassistant.R;
+import com.codegama.assignmentassistant.activity.MainActivity;
+import com.codegama.assignmentassistant.database.DatabaseClient;
+import com.codegama.assignmentassistant.model.Assignment;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.drawable.DrawableUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,7 +35,7 @@ public class ShowCalendarViewBottomSheet extends BottomSheetDialogFragment {
     ImageView back;
     @BindView(R.id.calendarView)
     CalendarView calendarView;
-    List<Task> tasks = new ArrayList<>();
+    List<Assignment> assignments = new ArrayList<>();
 
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -63,7 +61,7 @@ public class ShowCalendarViewBottomSheet extends BottomSheetDialogFragment {
         unbinder = ButterKnife.bind(this, contentView);
         dialog.setContentView(contentView);
         calendarView.setHeaderColor(R.color.colorAccent);
-        getSavedTasks();
+        getSavedAssignments();
         back.setOnClickListener(view -> dialog.dismiss());
     }
 
@@ -72,36 +70,36 @@ public class ShowCalendarViewBottomSheet extends BottomSheetDialogFragment {
         super.onDestroyView();
     }
 
-    private void getSavedTasks() {
+    private void getSavedAssignments() {
 
-        class GetSavedTasks extends AsyncTask<Void, Void, List<Task>> {
+        class GetSavedAssignments extends AsyncTask<Void, Void, List<Assignment>> {
             @Override
-            protected List<Task> doInBackground(Void... voids) {
-                tasks = DatabaseClient
+            protected List<Assignment> doInBackground(Void... voids) {
+                assignments = DatabaseClient
                         .getInstance(getActivity())
                         .getAppDatabase()
                         .dataBaseAction()
-                        .getAllTasksList();
-                return tasks;
+                        .getAllAssignmentsList();
+                return assignments;
             }
 
             @Override
-            protected void onPostExecute(List<Task> tasks) {
-                super.onPostExecute(tasks);
+            protected void onPostExecute(List<Assignment> assignments) {
+                super.onPostExecute(assignments);
                 calendarView.setEvents(getHighlitedDays());
             }
         }
 
-        GetSavedTasks savedTasks = new GetSavedTasks();
-        savedTasks.execute();
+        GetSavedAssignments savedAssignments = new GetSavedAssignments();
+        savedAssignments.execute();
     }
 
     public List<EventDay> getHighlitedDays() {
         List<EventDay> events = new ArrayList<>();
 
-        for(int i = 0; i < tasks.size(); i++) {
+        for(int i = 0; i < assignments.size(); i++) {
             Calendar calendar = Calendar.getInstance();
-            String[] items1 = tasks.get(i).getDate().split("-");
+            String[] items1 = assignments.get(i).getDate().split("-");
             String dd = items1[0];
             String month = items1[1];
             String year = items1[2];

@@ -1,4 +1,4 @@
-package com.codegama.todolistapplication;
+package com.codegama.assignmentassistant;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.codegama.todolistapplication", appContext.getPackageName());
+        assertEquals("com.codegama.assignmentassistant", appContext.getPackageName());
     }
 }

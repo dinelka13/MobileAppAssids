@@ -1,13 +1,10 @@
-package com.codegama.todolistapplication.activity;
+package com.codegama.assignmentassistant.activity;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Locale;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 

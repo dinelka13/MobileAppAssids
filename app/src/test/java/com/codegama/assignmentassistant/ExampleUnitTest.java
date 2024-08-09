@@ -1,4 +1,4 @@
-package com.codegama.todolistapplication;
+package com.codegama.assignmentassistant;
 
 import org.junit.Test;
 

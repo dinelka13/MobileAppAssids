@@ -1,4 +1,4 @@
-package com.codegama.todolistapplication.database;
+package com.codegama.assignmentassistant.database;
 
 import android.content.Context;
 
@@ -13,7 +13,7 @@ public class DatabaseClient {
 
     private DatabaseClient(Context mCtx) {
         this.mCtx = mCtx;
-        appDatabase = Room.databaseBuilder(mCtx, AppDatabase.class, "Task.db")
+        appDatabase = Room.databaseBuilder(mCtx, AppDatabase.class, "Assignment.db")
                 .fallbackToDestructiveMigration()
                 .build();
     }

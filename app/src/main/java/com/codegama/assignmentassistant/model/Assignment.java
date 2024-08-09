@@ -1,4 +1,4 @@
-package com.codegama.todolistapplication.model;
+package com.codegama.assignmentassistant.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -7,16 +7,16 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity
-public class Task implements Serializable {
+public class Assignment implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    int taskId;
-    @ColumnInfo(name = "taskTitle")
-    String taskTitle;
+    int assignmentId;
+    @ColumnInfo(name = "assignmentTitle")
+    String assignmentTitle;
     @ColumnInfo(name = "date")
     String date;
-    @ColumnInfo(name = "taskDescription")
-    String taskDescrption;
+    @ColumnInfo(name = "assignmentDescription")
+    String assignmentDescrption;
     @ColumnInfo(name = "isComplete")
     boolean isComplete;
     @ColumnInfo(name = "firstAlarmTime")
@@ -28,7 +28,7 @@ public class Task implements Serializable {
     @ColumnInfo(name = "event")
     String event;
 
-    public Task() {
+    public Assignment() {
 
     }
 
@@ -72,20 +72,20 @@ public class Task implements Serializable {
         this.lastAlarm = lastAlarm;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public int getAssignmentId() {
+        return assignmentId;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setAssignmentId(int assignmentId) {
+        this.assignmentId = assignmentId;
     }
 
-    public String getTaskTitle() {
-        return taskTitle;
+    public String getAssignmentTitle() {
+        return assignmentTitle;
     }
 
-    public void setTaskTitle(String taskTitle) {
-        this.taskTitle = taskTitle;
+    public void setAssignmentTitle(String assignmentTitle) {
+        this.assignmentTitle = assignmentTitle;
     }
 
     public String getDate() {
@@ -96,11 +96,11 @@ public class Task implements Serializable {
         this.date = date;
     }
 
-    public String getTaskDescrption() {
-        return taskDescrption;
+    public String getAssignmentDescrption() {
+        return assignmentDescrption;
     }
 
-    public void setTaskDescrption(String taskDescrption) {
-        this.taskDescrption = taskDescrption;
+    public void setAssignmentDescrption(String assignmentDescrption) {
+        this.assignmentDescrption = assignmentDescrption;
     }
 }

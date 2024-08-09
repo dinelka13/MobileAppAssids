@@ -1,4 +1,4 @@
-package com.codegama.todolistapplication.adapter;
+package com.codegama.assignmentassistant.adapter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,17 +12,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.codegama.todolistapplication.R;
-import com.codegama.todolistapplication.activity.MainActivity;
-import com.codegama.todolistapplication.bottomSheetFragment.CreateTaskBottomSheetFragment;
-import com.codegama.todolistapplication.database.DatabaseClient;
-import com.codegama.todolistapplication.model.Task;
+import com.codegama.assignmentassistant.R;
+import com.codegama.assignmentassistant.activity.MainActivity;
+import com.codegama.assignmentassistant.bottomSheetFragment.CreateAssignmentBottomSheetFragment;
+import com.codegama.assignmentassistant.database.DatabaseClient;
+import com.codegama.assignmentassistant.model.Assignment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,42 +30,42 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
+public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.AssignmentViewHolder> {
 
     private MainActivity context;
     private LayoutInflater inflater;
-    private List<Task> taskList;
+    private List<Assignment> assignmentList;
     public SimpleDateFormat dateFormat = new SimpleDateFormat("EE dd MMM yyyy", Locale.US);
     public SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-M-yyyy", Locale.US);
     Date date = null;
     String outputDateString = null;
-    CreateTaskBottomSheetFragment.setRefreshListener setRefreshListener;
+    CreateAssignmentBottomSheetFragment.setRefreshListener setRefreshListener;
 
-    public TaskAdapter(MainActivity context, List<Task> taskList,  CreateTaskBottomSheetFragment.setRefreshListener setRefreshListener) {
+    public AssignmentAdapter(MainActivity context, List<Assignment> assignmentList, CreateAssignmentBottomSheetFragment.setRefreshListener setRefreshListener) {
         this.context = context;
-        this.taskList = taskList;
+        this.assignmentList = assignmentList;
         this.setRefreshListener = setRefreshListener;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @NonNull
     @Override
-    public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = inflater.inflate(R.layout.item_task, viewGroup, false);
-        return new TaskViewHolder(view);
+    public AssignmentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View view = inflater.inflate(R.layout.item_assignment, viewGroup, false);
+        return new AssignmentViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
-        Task task = taskList.get(position);
-        holder.title.setText(task.getTaskTitle());
-        holder.description.setText(task.getTaskDescrption());
-        holder.time.setText(task.getLastAlarm());
-        holder.status.setText(task.isComplete() ? "COMPLETED" : "UPCOMING");
+    public void onBindViewHolder(@NonNull AssignmentViewHolder holder, int position) {
+        Assignment assignment = assignmentList.get(position);
+        holder.title.setText(assignment.getAssignmentTitle());
+        holder.description.setText(assignment.getAssignmentDescrption());
+        holder.time.setText(assignment.getLastAlarm());
+        holder.status.setText(assignment.isComplete() ? "COMPLETED" : "UPCOMING");
         holder.options.setOnClickListener(view -> showPopUpMenu(view, position));
 
         try {
-            date = inputDateFormat.parse(task.getDate());
+            date = inputDateFormat.parse(assignment.getDate());
             outputDateString = dateFormat.format(date);
 
             String[] items1 = outputDateString.split(" ");
@@ -85,7 +83,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
     public void showPopUpMenu(View view, int position) {
-        final Task task = taskList.get(position);
+        final Assignment assignment = assignmentList.get(position);
         PopupMenu popupMenu = new PopupMenu(context, view);
         popupMenu.getMenuInflater().inflate(R.menu.menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(item -> {
@@ -94,19 +92,19 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context, R.style.AppTheme_Dialog);
                     alertDialogBuilder.setTitle(R.string.delete_confirmation).setMessage(R.string.sureToDelete).
                             setPositiveButton(R.string.yes, (dialog, which) -> {
-                                deleteTaskFromId(task.getTaskId(), position);
+                                deleteAssignmentFromId(assignment.getAssignmentId(), position);
                             })
                             .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel()).show();
                     break;
                 case R.id.menuUpdate:
-                    CreateTaskBottomSheetFragment createTaskBottomSheetFragment = new CreateTaskBottomSheetFragment();
-                    createTaskBottomSheetFragment.setTaskId(task.getTaskId(), true, context, context);
-                    createTaskBottomSheetFragment.show(context.getSupportFragmentManager(), createTaskBottomSheetFragment.getTag());
+                    CreateAssignmentBottomSheetFragment createAssignmentBottomSheetFragment = new CreateAssignmentBottomSheetFragment();
+                    createAssignmentBottomSheetFragment.setAssignmentId(assignment.getAssignmentId(), true, context, context);
+                    createAssignmentBottomSheetFragment.show(context.getSupportFragmentManager(), createAssignmentBottomSheetFragment.getTag());
                     break;
                 case R.id.menuComplete:
                     AlertDialog.Builder completeAlertDialog = new AlertDialog.Builder(context, R.style.AppTheme_Dialog);
                     completeAlertDialog.setTitle(R.string.confirmation).setMessage(R.string.sureToMarkAsComplete).
-                            setPositiveButton(R.string.yes, (dialog, which) -> showCompleteDialog(task.getTaskId(), position))
+                            setPositiveButton(R.string.yes, (dialog, which) -> showCompleteDialog(assignment.getAssignmentId(), position))
                             .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel()).show();
                     break;
             }
@@ -115,12 +113,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         popupMenu.show();
     }
 
-    public void showCompleteDialog(int taskId, int position) {
+    public void showCompleteDialog(int assignmentId, int position) {
         Dialog dialog = new Dialog(context, R.style.AppTheme);
         dialog.setContentView(R.layout.dialog_completed_theme);
         Button close = dialog.findViewById(R.id.closeButton);
         close.setOnClickListener(view -> {
-            deleteTaskFromId(taskId, position);
+            deleteAssignmentFromId(assignmentId, position);
             dialog.dismiss();
         });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -128,41 +126,41 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
 
-    private void deleteTaskFromId(int taskId, int position) {
-        class GetSavedTasks extends AsyncTask<Void, Void, List<Task>> {
+    private void deleteAssignmentFromId(int assignmentId, int position) {
+        class GetSavedAssignments extends AsyncTask<Void, Void, List<Assignment>> {
             @Override
-            protected List<Task> doInBackground(Void... voids) {
+            protected List<Assignment> doInBackground(Void... voids) {
                 DatabaseClient.getInstance(context)
                         .getAppDatabase()
                         .dataBaseAction()
-                        .deleteTaskFromId(taskId);
+                        .deleteAssignmentFromId(assignmentId);
 
-                return taskList;
+                return assignmentList;
             }
 
             @Override
-            protected void onPostExecute(List<Task> tasks) {
-                super.onPostExecute(tasks);
+            protected void onPostExecute(List<Assignment> assignments) {
+                super.onPostExecute(assignments);
                 removeAtPosition(position);
                 setRefreshListener.refresh();
             }
         }
-        GetSavedTasks savedTasks = new GetSavedTasks();
-        savedTasks.execute();
+        GetSavedAssignments savedAssignments = new GetSavedAssignments();
+        savedAssignments.execute();
     }
 
     private void removeAtPosition(int position) {
-        taskList.remove(position);
+        assignmentList.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, taskList.size());
+        notifyItemRangeChanged(position, assignmentList.size());
     }
 
     @Override
     public int getItemCount() {
-        return taskList.size();
+        return assignmentList.size();
     }
 
-    public class TaskViewHolder extends RecyclerView.ViewHolder {
+    public class AssignmentViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.day)
         TextView day;
         @BindView(R.id.date)
@@ -180,7 +178,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         @BindView(R.id.time)
         TextView time;
 
-        TaskViewHolder(@NonNull View view) {
+        AssignmentViewHolder(@NonNull View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

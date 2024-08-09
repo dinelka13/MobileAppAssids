@@ -1,4 +1,4 @@
-package com.codegama.todolistapplication;
+package com.codegama.assignmentassistant;
 
 import android.app.Application;
 import android.content.ComponentCallbacks2;

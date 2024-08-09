@@ -1,24 +1,18 @@
-package com.codegama.todolistapplication.broadcastReceiver;
+package com.codegama.assignmentassistant.broadcastReceiver;
 
-import android.app.IntentService;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
-import com.codegama.todolistapplication.R;
-import com.codegama.todolistapplication.activity.AlarmActivity;
-import com.codegama.todolistapplication.activity.MainActivity;
+import com.codegama.assignmentassistant.R;
+import com.codegama.assignmentassistant.activity.MainActivity;
 
 public class AlarmService extends Service {
     private static final int NOTIFICATION_ID = 3;
