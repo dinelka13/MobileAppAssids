@@ -26,9 +26,11 @@ public interface OnDataBaseAction {
     @Query("SELECT * FROM Assignment WHERE assignmentId = :assignmentId")
     Assignment selectDataFromAnId(int assignmentId);
 
-    @Query("UPDATE Assignment SET assignmentTitle = :assignmentTitle, assignmentDescription = :assignmentDescription, date = :assignmentDate, " +
+    @Query("UPDATE Assignment SET assignmentTitle = :assignmentTitle, assignmentDescription = :assignmentDescription, date = :assignmentDueDate, " +
             "lastAlarm = :assignmentTime, event = :assignmentEvent WHERE assignmentId = :assignmentId")
-    void updateAnExistingRow(int assignmentId, String assignmentTitle, String assignmentDescription , String assignmentDate, String assignmentTime,
+    void updateAnExistingRow(int assignmentId, String assignmentTitle, String assignmentDescription , String assignmentDueDate, String assignmentTime,
                             String assignmentEvent);
 
 }
+
+

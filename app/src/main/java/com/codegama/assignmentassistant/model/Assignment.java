@@ -1,4 +1,4 @@
-package com.codegama.assignmentassistant.model;
+/*package com.codegama.assignmentassistant.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -102,5 +102,89 @@ public class Assignment implements Serializable {
 
     public void setAssignmentDescrption(String assignmentDescrption) {
         this.assignmentDescrption = assignmentDescrption;
+    }
+}*/
+package com.codegama.assignmentassistant.model;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "assignments")
+public class Assignment {
+
+    @PrimaryKey(autoGenerate = true)
+    private int assignmentId;
+    private String assignmentTitle;
+    private String assignmentDescrption;
+    private String date;
+    private String lastAlarm;
+    private boolean isComplete;
+    private int totalQuestions;
+    private int completedQuestions;
+
+    // Getters and Setters
+
+    public int getAssignmentId() {
+        return assignmentId;
+    }
+
+    public void setAssignmentId(int assignmentId) {
+        this.assignmentId = assignmentId;
+    }
+
+    public String getAssignmentTitle() {
+        return assignmentTitle;
+    }
+
+    public void setAssignmentTitle(String assignmentTitle) {
+        this.assignmentTitle = assignmentTitle;
+    }
+
+    public String getAssignmentDescrption() {
+        return assignmentDescrption;
+    }
+
+    public void setAssignmentDescrption(String assignmentDescrption) {
+        this.assignmentDescrption = assignmentDescrption;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getLastAlarm() {
+        return lastAlarm;
+    }
+
+    public void setLastAlarm(String lastAlarm) {
+        this.lastAlarm = lastAlarm;
+    }
+
+    public boolean isComplete() {
+        return isComplete;
+    }
+
+    public void setComplete(boolean complete) {
+        isComplete = complete;
+    }
+
+    public int getTotalQuestions() {
+        return totalQuestions;
+    }
+
+    public void setTotalQuestions(int totalQuestions) {
+        this.totalQuestions = totalQuestions;
+    }
+
+    public int getCompletedQuestions() {
+        return completedQuestions;
+    }
+
+    public void setCompletedQuestions(int completedQuestions) {
+        this.completedQuestions = completedQuestions;
     }
 }

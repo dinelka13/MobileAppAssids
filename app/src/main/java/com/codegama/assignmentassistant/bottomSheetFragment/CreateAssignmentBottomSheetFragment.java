@@ -42,8 +42,8 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
     EditText addAssignmentTitle;
     @BindView(R.id.addAssignmentDescription)
     EditText addAssignmentDescription;
-    @BindView(R.id.assignmentDate)
-    EditText assignmentDate;
+    @BindView(R.id.assignmentDueDate)
+    EditText assignmentDueDate;
     @BindView(R.id.assignmentTime)
     EditText assignmentTime;
     @BindView(R.id.assignmentEvent)
@@ -100,7 +100,7 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
             showAssignmentFromId();
         }
 
-        assignmentDate.setOnTouchListener((view, motionEvent) -> {
+        assignmentDueDate.setOnTouchListener((view, motionEvent) -> {
             if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
                 final Calendar c = Calendar.getInstance();
                 mYear = c.get(Calendar.YEAR);
@@ -108,7 +108,7 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
                 mDay = c.get(Calendar.DAY_OF_MONTH);
                 datePickerDialog = new DatePickerDialog(getActivity(),
                         (view1, year, monthOfYear, dayOfMonth) -> {
-                            assignmentDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            assignmentDueDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             datePickerDialog.dismiss();
                         }, mYear, mMonth, mDay);
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -145,7 +145,7 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
             Toast.makeText(activity, "Please enter a valid description", Toast.LENGTH_SHORT).show();
             return false;
         }
-        else if(assignmentDate.getText().toString().equalsIgnoreCase("")) {
+        else if(assignmentDueDate.getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(activity, "Please enter date", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -175,7 +175,7 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
                 Assignment createAssignment = new Assignment();
                 createAssignment.setAssignmentTitle(addAssignmentTitle.getText().toString());
                 createAssignment.setAssignmentDescrption(addAssignmentDescription.getText().toString());
-                createAssignment.setDate(assignmentDate.getText().toString());
+                createAssignment.setDate(assignmentDueDate.getText().toString());
                 createAssignment.setLastAlarm(assignmentTime.getText().toString());
                 createAssignment.setEvent(assignmentEvent.getText().toString());
 
@@ -188,7 +188,7 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
                             .dataBaseAction()
                             .updateAnExistingRow(assignmentId, addAssignmentTitle.getText().toString(),
                                     addAssignmentDescription.getText().toString(),
-                                    assignmentDate.getText().toString(),
+                                    assignmentDueDate.getText().toString(),
                                     assignmentTime.getText().toString(),
                                     assignmentEvent.getText().toString());
 
@@ -214,7 +214,7 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void createAnAlarm() {
         try {
-            String[] items1 = assignmentDate.getText().toString().split("-");
+            String[] items1 = assignmentDueDate.getText().toString().split("-");
             String dd = items1[0];
             String month = items1[1];
             String year = items1[2];
@@ -236,7 +236,7 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
             Intent alarmIntent = new Intent(activity, AlarmBroadcastReceiver.class);
             alarmIntent.putExtra("TITLE", addAssignmentTitle.getText().toString());
             alarmIntent.putExtra("DESC", addAssignmentDescription.getText().toString());
-            alarmIntent.putExtra("DATE", assignmentDate.getText().toString());
+            alarmIntent.putExtra("DATE", assignmentDueDate.getText().toString());
             alarmIntent.putExtra("TIME", assignmentTime.getText().toString());
             PendingIntent pendingIntent = PendingIntent.getBroadcast(activity,count, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -287,7 +287,7 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
     private void setDataInUI() {
         addAssignmentTitle.setText(assignment.getAssignmentTitle());
         addAssignmentDescription.setText(assignment.getAssignmentDescrption());
-        assignmentDate.setText(assignment.getDate());
+        assignmentDueDate.setText(assignment.getDate());
         assignmentTime.setText(assignment.getLastAlarm());
         assignmentEvent.setText(assignment.getEvent());
     }

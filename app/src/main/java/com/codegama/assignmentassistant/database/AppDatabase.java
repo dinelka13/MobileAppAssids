@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.codegama.assignmentassistant.model.Assignment;
 
-@Database(entities = {Assignment.class}, version = 1, exportSchema = false)
+@Database(entities = {Assignment.class}, version = 2, exportSchema = false)
 public  abstract class AppDatabase extends RoomDatabase {
 
     public abstract OnDataBaseAction dataBaseAction();
@@ -32,4 +32,6 @@ public  abstract class AppDatabase extends RoomDatabase {
 
     }
 }
+
+
 
