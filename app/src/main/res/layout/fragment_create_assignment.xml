@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Fill the details below to add a assignment into your TODO"
+            android:text="Fill the details below to add an assignment"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:alpha="0.8"
@@ -93,6 +93,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:text="Total Questions"
+            tools:ignore="MissingPrefix" />
+        <EditText
+            android:textSize="14sp"
+            fontPath="fonts/nunito_light.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:singleLine="true"
+            android:background="@drawable/btn_border"
+            android:padding="10dp"
+            android:id="@+id/addTotalQuestions"
+            tools:ignore="MissingPrefix" />
+
+
+        <TextView
+            android:layout_marginLeft="3dp"
+            fontPath="fonts/nunito_light.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Completed Questions"
+            tools:ignore="MissingPrefix" />
+        <EditText
+            android:textSize="14sp"
+            fontPath="fonts/nunito_light.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:singleLine="true"
+            android:background="@drawable/btn_border"
+            android:padding="10dp"
+            android:id="@+id/addCompletedQuestions"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:layout_marginLeft="3dp"
+            fontPath="fonts/nunito_light.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:text="Assignment Due Date"
             tools:ignore="MissingPrefix" />
 
@@ -114,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Assignment time"
+            android:text="Assignment Time"
             tools:ignore="MissingPrefix" />
 
         <EditText

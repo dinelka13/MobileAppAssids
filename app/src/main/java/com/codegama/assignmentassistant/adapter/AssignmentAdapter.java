@@ -247,7 +247,9 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
     @Override
     public AssignmentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = inflater.inflate(R.layout.item_assignment, viewGroup, false);
+
         return new AssignmentViewHolder(view);
+
     }
 
     @Override
@@ -277,6 +279,7 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
         } else {
             progressColor = ContextCompat.getColor(context, R.color.progress_red);
         }
+
 
         holder.progressBar.setProgressTintList(ColorStateList.valueOf(progressColor));
 

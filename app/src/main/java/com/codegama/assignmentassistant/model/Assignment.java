@@ -118,6 +118,7 @@ public class Assignment {
     private String assignmentDescrption;
     private String date;
     private String lastAlarm;
+    private String event;
     private boolean isComplete;
     private int totalQuestions;
     private int completedQuestions;
@@ -186,5 +187,13 @@ public class Assignment {
 
     public void setCompletedQuestions(int completedQuestions) {
         this.completedQuestions = completedQuestions;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
     }
 }

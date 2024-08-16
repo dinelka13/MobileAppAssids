@@ -42,6 +42,10 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
     EditText addAssignmentTitle;
     @BindView(R.id.addAssignmentDescription)
     EditText addAssignmentDescription;
+    @BindView(R.id.addTotalQuestions)
+    EditText addTotalQuestions;
+    @BindView(R.id.addCompletedQuestions)
+    EditText addCompletedquestions;
     @BindView(R.id.assignmentDueDate)
     EditText assignmentDueDate;
     @BindView(R.id.assignmentTime)
@@ -61,6 +65,8 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
     DatePickerDialog datePickerDialog;
     MainActivity activity;
     public static int count = 0;
+    private EditText totalQuestions;
+    private EditText completedQuestions;
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
@@ -178,6 +184,18 @@ public class CreateAssignmentBottomSheetFragment extends BottomSheetDialogFragme
                 createAssignment.setDate(assignmentDueDate.getText().toString());
                 createAssignment.setLastAlarm(assignmentTime.getText().toString());
                 createAssignment.setEvent(assignmentEvent.getText().toString());
+                int totalQuestionsValue = Integer.parseInt(totalQuestions.getText().toString());
+                int completedQuestionsValue = Integer.parseInt(completedQuestions.getText().toString());
+
+                // Set the totalQuestionsValue to the assignment object
+                createAssignment.setTotalQuestions(totalQuestionsValue);
+                createAssignment.setCompletedQuestions(completedQuestionsValue);
+                //createAssignment.setTotalQuestions(totalQuestions.getText().toString());
+                //createAssignment.setCompletedQuestions(completedQuestions.getText().toString());
+                //int totalQuestionsValue = Integer.parseInt(totalQuestions.getText().toString());
+               // int completedQuestionsValue = Integer.parseInt(completedQuestions.getText().toString());
+
+
 
                 if (!isEdit)
                     DatabaseClient.getInstance(getActivity()).getAppDatabase()
